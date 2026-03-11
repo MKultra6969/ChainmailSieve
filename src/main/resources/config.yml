@@ -1,0 +1,32 @@
+enabled: true
+
+debug:
+  enabled: false
+
+durability-cost: 1
+
+supported-materials:
+  - SAND
+  - RED_SAND
+  - GRAVEL
+
+permissions:
+  use: chainmailsieve.use
+  bypass: chainmailsieve.bypass
+  admin: chainmailsieve.admin
+
+effects:
+  particles:
+    enabled: true
+    count: 18
+    offset: 0.18
+    extra: 0.0
+  sound:
+    enabled: true
+    volume: 1.0
+    pitch: 1.0
+
+messages:
+  reloaded: "&aChainmailSieve config reloaded."
+  no-permission: "&cYou do not have permission to use this command."
+  usage: "&eUsage: /chainmailsieve reload"

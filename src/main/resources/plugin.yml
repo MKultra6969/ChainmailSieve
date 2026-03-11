@@ -1,0 +1,25 @@
+name: ChainmailSieve
+main: dev.mkultra69.chainmailsieve.ChainmailSievePlugin
+version: ${version}
+api-version: '1.21'
+author: mkultra69
+description: Breaks falling sand and gravel on chainmail helmets.
+
+commands:
+  chainmailsieve:
+    description: Reloads ChainmailSieve configuration.
+    usage: /<command> reload
+    permission: chainmailsieve.admin
+    aliases: [cms]
+
+permissions:
+  chainmailsieve.use:
+    description: Allows the chainmail helmet mechanic.
+    default: true
+  chainmailsieve.bypass:
+    description: Ignores the chainmail helmet mechanic.
+    default: false
+  chainmailsieve.admin:
+    description: Allows administrative ChainmailSieve commands.
+    default: op
+
