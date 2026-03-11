@@ -3,6 +3,9 @@ enabled: true
 debug:
   enabled: false
 
+bstats:
+  enabled: true
+
 durability-cost: 1
 
 supported-materials:

@@ -17,6 +17,7 @@ public record PluginSettings(
         String usePermission,
         String bypassPermission,
         String adminPermission,
+        BStatsSettings bStatsSettings,
         ParticleSettings particleSettings,
         SoundSettings soundSettings,
         String reloadedMessage,
@@ -34,6 +35,7 @@ public record PluginSettings(
                 config.getString("permissions.use", "chainmailsieve.use"),
                 config.getString("permissions.bypass", "chainmailsieve.bypass"),
                 config.getString("permissions.admin", "chainmailsieve.admin"),
+                new BStatsSettings(config.getBoolean("bstats.enabled", true)),
                 new ParticleSettings(
                         config.getBoolean("effects.particles.enabled", true),
                         Math.max(0, config.getInt("effects.particles.count", 18)),
@@ -85,6 +87,10 @@ public record PluginSettings(
                 .collect(java.util.stream.Collectors.toSet());
 
         return normalized.contains("SAND") && normalized.contains("GRAVEL");
+    }
+
+    public record BStatsSettings(
+            boolean enabled) {
     }
 
     public record ParticleSettings(

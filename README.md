@@ -14,6 +14,7 @@ No client-side mod is required.
 - Plays `falling_dust` particles and the matching block break sound
 - Supports permission-based control through standard Bukkit permission nodes
 - Works with permission managers such as LuckPerms without requiring a direct dependency
+- Supports optional anonymous usage reporting through `bStats`
 
 ## How It Works
 
@@ -35,6 +36,9 @@ enabled: true
 
 debug:
   enabled: false
+
+bstats:
+  enabled: true
 
 durability-cost: 1
 
@@ -69,6 +73,7 @@ messages:
 
 - `enabled`: Enables or disables the entire mechanic
 - `debug.enabled`: Enables debug logging for troubleshooting
+- `bstats.enabled`: Enables bStats initialization on startup
 - `durability-cost`: How much durability is consumed per impact
 - `supported-materials`: List of falling block types that can be broken by the helmet
 - `permissions.*`: Permission nodes used by the plugin
@@ -119,6 +124,16 @@ Example:
 4. Edit `plugins/ChainmailSieve/config.yml` if needed
 5. Use `/chainmailsieve reload` after changing the config
 
+## bStats
+
+`bStats` is bundled into the shadow jar and initialized from `config.yml`.
+The plugin uses the hardcoded bStats id `30051`, and server owners can only enable or disable metrics:
+
+```yml
+bstats:
+  enabled: true
+```
+
 ## Notes
 
 - The mechanic only works when the player is actually wearing a chainmail helmet
@@ -134,7 +149,7 @@ To build from source, run the Gradle wrapper with Java 21 or newer.
 ```powershell
 $env:JAVA_HOME = 'C:\Program Files\Java\jdk-25'
 $env:Path = "$env:JAVA_HOME\bin;$env:Path"
-.\gradlew.bat build
+.\gradlew.bat shadowJar
 ```
 
-The compiled jar will be created in `build/libs/`.
+The bStats-enabled jar will be created in `build/libs/` with the `-all.jar` suffix.

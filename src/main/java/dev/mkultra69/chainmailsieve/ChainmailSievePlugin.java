@@ -3,10 +3,12 @@ package dev.mkultra69.chainmailsieve;
 import dev.mkultra69.chainmailsieve.command.ChainmailSieveCommand;
 import dev.mkultra69.chainmailsieve.config.PluginSettings;
 import dev.mkultra69.chainmailsieve.listener.FallingBlockHeadListener;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ChainmailSievePlugin extends JavaPlugin {
+    private static final int BSTATS_PLUGIN_ID = 30051;
 
     private PluginSettings settings;
     private FallingBlockHeadListener fallingBlockHeadListener;
@@ -16,6 +18,7 @@ public final class ChainmailSievePlugin extends JavaPlugin {
         saveDefaultConfig();
         reloadPluginSettings();
         registerCommands();
+        initializeMetrics();
 
         fallingBlockHeadListener = new FallingBlockHeadListener(this);
         fallingBlockHeadListener.start();
@@ -44,6 +47,17 @@ public final class ChainmailSievePlugin extends JavaPlugin {
         if (settings != null && settings.debugEnabled()) {
             getLogger().info("[debug] " + message);
         }
+    }
+
+    private void initializeMetrics() {
+        PluginSettings.BStatsSettings bStatsSettings = settings.bStatsSettings();
+        if (!bStatsSettings.enabled()) {
+            debug("bStats metrics are disabled in config.");
+            return;
+        }
+
+        new Metrics(this, BSTATS_PLUGIN_ID);
+        debug("bStats metrics initialized with plugin id " + BSTATS_PLUGIN_ID + ".");
     }
 
     private void registerCommands() {
